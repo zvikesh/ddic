@@ -12,6 +12,12 @@ https://link.excalidraw.com/l/5eMbpiBu0l3/99xUHIsdcjJ
     DATA lt_flight TYPE STANDARD TABLE OF zvks_a_flight.
 
     DATA(lv_current_date) = cl_abap_context_info=>get_system_date( ).
+    DATA(lv_user_id) = cl_abap_context_info=>get_user_technical_name( ).
+
+    GET TIME STAMP FIELD DATA(lv_time_stamp).
+    "Check below
+    "utclong_current( )
+    "cl_abap_utclong=>from_system_timestamp().
 
     lt_flight = VALUE #(
     ( airport_from_id = 'SFO' airport_to_id = 'SIN' airline_id = 'SQ' flight_date = lv_current_date departure_time = '011500' arrival_time = '115000' distance = '13523' distance_unit = 'KM' price = '10818.00' currency_code = 'SGD' plane_type_id = '767-200'  seats_max = '260' seats_occupied = '223' )
