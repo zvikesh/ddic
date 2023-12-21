@@ -4,11 +4,11 @@ https://link.excalidraw.com/l/5eMbpiBu0l3/99xUHIsdcjJ
 
 # Data Generator Code Backup
 
-**Flight**
+## Flight
+
+**Get Flight Data**
 
 ```
-  METHOD get_flight_data.
-
     DATA lt_flight TYPE STANDARD TABLE OF zvks_a_flight.
 
     DATA(lv_current_date) = cl_abap_context_info=>get_system_date( ).
@@ -62,6 +62,18 @@ https://link.excalidraw.com/l/5eMbpiBu0l3/99xUHIsdcjJ
     ENDDO.
 
     CLEAR lt_flight.
+```
 
-  ENDMETHOD.
+**Set Flight Data**
+
+```
+    DELETE FROM zvks_a_flight.
+    COMMIT WORK AND WAIT.
+
+    rt_flight = me->get_flight_data( ).
+
+    IF rt_flight IS NOT INITIAL.
+      MODIFY zvks_a_flight FROM TABLE @rt_flight.
+      COMMIT WORK AND WAIT.
+    ENDIF.
 ```
